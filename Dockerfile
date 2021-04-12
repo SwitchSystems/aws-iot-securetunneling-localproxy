@@ -105,4 +105,10 @@ RUN mkdir -p /home/aws-iot-securetunneling-localproxy/certs && \
 
 COPY --from=builder /home/aws-iot-securetunneling-localproxy /home/aws-iot-securetunneling-localproxy
 
+# Add helper utilities for doing ssh connection to device
+RUN apt update && apt upgrade -y && \
+    apt install -y openssh-client screen  && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
+
 WORKDIR /home/aws-iot-securetunneling-localproxy
